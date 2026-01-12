@@ -1,0 +1,8 @@
+He estado revisando el código para compararlo con hacer otras asignaciones y de RIS y configuración de retardos de la RIS y al hacer pruebas había algo que no me cuadraba. He encontrado la línea en la que teníamos el error:
+
+h_reflected(:,:,t) = H_AP_RIS(:,:,t) * diag(thetaMatrix(:)) * squeeze(H_RIS_UE(:, t, :)); % dim: (1x L*N_AP)
+Así es como queda correcta. Te envío el channelestimates con esta línea modificada y también he cambiado (aunque eso era correcto), h_r  por h_t, para que coincida con el libro ya que igual que en el libro nosotros valoramos UL.
+
+También he cambiado en setup las líneas de arrayResp, quitando la normalización, así arrayResp tiene ganancia que corresponde al número de antenas.
+
+Por último, en assgnRIS lo he creado con celdas, para así poder asignar más de 1 usuario a cada RIS y en el main incluyo un if para cuando tenemos 0 RIS que no hay asignación.
